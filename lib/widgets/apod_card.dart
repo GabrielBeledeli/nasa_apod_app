@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/apod_model.dart';
+import 'apod_video_player.dart';
 
 /// Card visual para exibição de um item astronômico da NASA APOD.
 class ApodCard extends StatefulWidget {
@@ -138,15 +139,7 @@ class _ApodCardState extends State<ApodCard> {
     TextTheme textTheme,
   ) {
     if (apod.mediaType == 'video') {
-      return _buildFallbackContainer(
-        colorScheme: colorScheme,
-        textTheme: textTheme,
-        icon: Icons.play_circle_outline_rounded,
-        title: 'Conteúdo em Vídeo',
-        subtitle:
-            'A publicação astronômica deste dia é um vídeo e não pode ser exibida como imagem.',
-        extraInfo: apod.url.isNotEmpty ? apod.url : null,
-      );
+      return ApodVideoPlayer(apod: apod);
     }
 
     if (apod.mediaType != 'image' || apod.url.isEmpty) {
@@ -169,6 +162,7 @@ class _ApodCardState extends State<ApodCard> {
       child: Image.network(
         apod.url,
         width: double.infinity,
+        cacheWidth: 800,
         fit: BoxFit.cover,
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) {
@@ -202,6 +196,7 @@ class _ApodCardState extends State<ApodCard> {
           );
         },
         errorBuilder: (context, error, stackTrace) {
+          debugPrint('Erro ao carregar imagem (${apod.url}): $error');
           return _buildFallbackContainer(
             colorScheme: colorScheme,
             textTheme: textTheme,

@@ -18,7 +18,7 @@ class _FeedScreenState extends State<FeedScreen> {
   /// Data histórica do primeiro registro oficial publicado pela NASA APOD.
   static final DateTime _minApodDate = DateTime(1995, 6, 16);
 
-  /// Quantidade de dias buscados por lote (hoje + 6 dias anteriores = 7 dias).
+  /// Quantidade de dias buscados por lote (data referência + 6 dias anteriores = 7 dias).
   static const int _daysPerBatch = 7;
 
   final ApodService _apodService = const ApodService();
@@ -63,8 +63,12 @@ class _FeedScreenState extends State<FeedScreen> {
     return !_oldestLoadedDate!.isAfter(_minApodDate);
   }
 
-  /// Carrega o lote inicial de 7 dias encerrando em [endDate].
+  /// Carrega o lote inicial de 4 dias (data final até 3 dias atrás) encerrando em [endDate].
   Future<void> _fetchInitialBatch({required DateTime endDate}) async {
+    if (_isLoading) {
+      return;
+    }
+
     final normalizedEnd = DateTime(endDate.year, endDate.month, endDate.day);
     final calculatedStart = DateTime(
       normalizedEnd.year,
