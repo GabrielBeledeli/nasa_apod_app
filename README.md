@@ -43,15 +43,17 @@ Aplicativo mobile desenvolvido em **Flutter** para a disciplina acadêmica de De
 
 Para o desenvolvimento deste projeto foi gerada uma chave própria da NASA, mantida exclusivamente em ambiente local no arquivo `.env` na raiz do projeto (bloqueado via `.gitignore` para não expor credenciais privadas no repositório público).
 
-- **Comportamento padrão**: Caso o arquivo `.env` não possua uma chave personalizada configurada, o sistema utilizará automaticamente a chave padrão `DEMO_KEY`.
-- **Como gerar e configurar sua própria chave**:
-  1. Acesse [https://api.nasa.gov/](https://api.nasa.gov/) e vá até a seção **Generate API Key**.
-  2. Preencha seu nome e e-mail para receber gratuitamente sua chave pessoal.
-  3. Na raiz do projeto, copie o arquivo `.env.example` renomeando-o para `.env` e insira sua chave:
-     ```env
-     NASA_API_KEY=SUA_CHAVE_GERADA_AQUI
-     ```
-  4. Execute o projeto normalmente — o `dotenv.load(fileName: '.env')` carregará a chave automaticamente na inicialização.
+**Comportamento padrão**: Caso o arquivo `.env` não possua uma chave personalizada configurada, o sistema utilizará automaticamente a chave padrão `DEMO_KEY`.
+
+#### Como gerar e configurar sua própria chave
+
+1. Acesse [https://api.nasa.gov/](https://api.nasa.gov/) e vá até a seção **Generate API Key**.
+2. Preencha seu nome e e-mail para receber gratuitamente sua chave pessoal.
+3. Na raiz do projeto, copie o arquivo `.env.example` renomeando-o para `.env` e insira sua chave:
+   ```env
+   NASA_API_KEY=SUA_CHAVE_GERADA_AQUI
+   ```
+4. Execute o projeto normalmente — o `dotenv.load(fileName: '.env')` carregará a chave automaticamente na inicialização.
 
 ---
 
